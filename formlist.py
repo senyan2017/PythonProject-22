@@ -1,25 +1,32 @@
-from tkinter import *
+"""formlist.py – Listbox demo with Display and Delete buttons.
 
-def Delete():
-    checked_item = l.curselection()
-    for item in checked_item:
-        print(l.delete(item))
-def Clickme():
-    checked_item=l.curselection()
-    print(checked_item)
-    for item in checked_item:
-        print(l.get(item))
+Demonstrates: Listbox widget with EXTENDED selectmode,
+curselection(), get(), and delete() methods.
+"""
+from tkinter import Listbox, Button, EXTENDED, END
+from tkhelper import create_window, run
 
-bob = Tk()
-l = Listbox(bob,width=50,selectmode=EXTENDED)
-l.insert(1,"apple")
-l.insert(2,"orange")
-l.insert(3,"orange")
-l.insert(4,"orange")
-l.pack()
-b=Button(bob,text="Display",command=Clickme)
-b.pack()
-b1=Button(bob,text="Delete",command=Delete)
-b1.pack()
-bob.geometry("500x500+300+200")
-bob.mainloop()
+
+class ListBoxDemo:
+    def __init__(self, root):
+        self.listbox = Listbox(root, width=50, selectmode=EXTENDED)
+        for item in ("apple", "orange", "orange", "orange"):
+            self.listbox.insert(END, item)
+        self.listbox.pack()
+
+        Button(root, text="Display", command=self.show_selected).pack()
+        Button(root, text="Delete",  command=self.delete_selected).pack()
+
+    def show_selected(self):
+        for idx in self.listbox.curselection():
+            print(self.listbox.get(idx))
+
+    def delete_selected(self):
+        for idx in self.listbox.curselection():
+            self.listbox.delete(idx)
+
+
+if __name__ == "__main__":
+    root = create_window("Listbox Demo", "500x500+300+200")
+    ListBoxDemo(root)
+    run(root)

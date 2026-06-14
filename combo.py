@@ -1,20 +1,35 @@
-from tkinter import *
-from tkinter.ttk import Combobox
+"""combo.py – LabelFrame containing Spinbox and Scale widgets.
 
-def Clickme():
-    value=l.get()
-    print(value)
-
-bob = Tk()
-li=["Gkp","Ndls","lko","1","4","666"]
-l = Combobox(bob,value=li)
-l.set("select your city")
-l.pack()
+Demonstrates: LabelFrame as a visual grouping container, Spinbox
+for bounded numeric input, and Scale for slider-based input.
+"""
+from tkinter import Button, LabelFrame, Spinbox, Scale, HORIZONTAL
+from tkhelper import create_window, run
 
 
-l.pack()
-b=Button(bob,text="Display",command=Clickme)
-b.pack()
+class SpinScaleDemo:
+    def __init__(self, root):
+        frame = LabelFrame(root, text="Label frame", padx=15, pady=15)
 
-bob.geometry("500x500+300+200")
-bob.mainloop()
+        self.spin = Spinbox(frame, from_=1, to=12)
+        self.spin.pack()
+
+        self.scale = Scale(frame, from_=0, to=100, orient=HORIZONTAL,
+                           length=200, width=10, sliderlength=50)
+        self.scale.set(10)
+        self.scale.pack()
+
+        Button(frame, text="Get spin Box value",
+               command=self.show_values).pack()
+
+        frame.pack()
+
+    def show_values(self):
+        print(self.spin.get())
+        print(self.scale.get())
+
+
+if __name__ == "__main__":
+    root = create_window("Spinbox & Scale Demo")
+    SpinScaleDemo(root)
+    run(root)

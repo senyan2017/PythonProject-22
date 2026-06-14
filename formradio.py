@@ -1,16 +1,26 @@
-from tkinter import *
+"""formradio.py – RadioButton demo.
 
-def Clickme():
-    s1=s.get()
-    print(s1)
+Demonstrates: IntVar-bound RadioButton group and reading the
+selected value on a button click.
+"""
+from tkinter import IntVar, Radiobutton, Button
+from tkhelper import create_window, run
 
-bob=Tk()
-s=IntVar()
-r1=Radiobutton(bob,text="Male",value=1,variable=s)
-r2=Radiobutton(bob,text="Female",value=2,variable=s)
-r1.pack()
-r2.pack()
-b=Button(bob,text="Message Box",command=Clickme)
-b.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+
+class RadioDemo:
+    def __init__(self, root):
+        self.choice = IntVar()
+
+        Radiobutton(root, text="Male",   value=1, variable=self.choice).pack()
+        Radiobutton(root, text="Female", value=2, variable=self.choice).pack()
+
+        Button(root, text="Message Box", command=self.show_choice).pack()
+
+    def show_choice(self):
+        print(self.choice.get())
+
+
+if __name__ == "__main__":
+    root = create_window("RadioButton Demo")
+    RadioDemo(root)
+    run(root)

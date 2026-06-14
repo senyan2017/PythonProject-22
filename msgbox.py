@@ -1,17 +1,26 @@
-from tkinter import *
+"""msgbox.py – Messagebox demo.
+
+Demonstrates: messagebox.showinfo() and reacting to the user's
+response (yes / ok / cancel, etc.).
+"""
+from tkinter import Button
 from tkinter import messagebox
-
-bob=Tk()
-def msg():
-    ans=messagebox.showinfo("Question Box","Do you want to close?")
-    print(ans)
-    if ans=="yes":
-        print("thank you")
-    else:
-        bob.quit()
+from tkhelper import create_window, run
 
 
-b=Button(bob,text="Message Box",command=msg)
-b.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+def build_ui(root):
+    def on_show_message():
+        ans = messagebox.showinfo("Question Box", "Do you want to close?")
+        print(ans)
+        if ans == "yes":
+            print("thank you")
+        else:
+            root.quit()
+
+    Button(root, text="Message Box", command=on_show_message).pack()
+
+
+if __name__ == "__main__":
+    root = create_window("Messagebox Demo")
+    build_ui(root)
+    run(root)

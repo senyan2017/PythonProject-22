@@ -1,13 +1,23 @@
-from tkinter import *
+"""pop.py – Simple-dialog (prompt) demo.
+
+Demonstrates: simpledialog.askinteger() for getting numeric input
+from the user via a modal dialog.
+"""
+from tkinter import Button
 from tkinter import simpledialog
-
-def Clickme():
-    s=simpledialog.askinteger("Input string Box", "Plese Enter your name")
-    print(type(s),s)
+from tkhelper import create_window, run
 
 
-bob=Tk()
-b=Button(bob,text="Prompt Box",command=Clickme)
-b.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+def ask_integer():
+    value = simpledialog.askinteger("Input Box", "Please Enter a number")
+    print(type(value), value)
+
+
+def build_ui(root):
+    Button(root, text="Prompt Box", command=ask_integer).pack()
+
+
+if __name__ == "__main__":
+    root = create_window("Prompt Dialog Demo")
+    build_ui(root)
+    run(root)

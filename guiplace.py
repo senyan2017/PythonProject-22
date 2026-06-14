@@ -1,19 +1,23 @@
-from tkinter import *
+"""guiplace.py – Labels positioned with place() layout.
 
-bob=Tk()
-def msg():
-    print("button is clicked")
-frame=Frame(bob,width=400,height=400)
-user = Label(frame,text="Enter User Name")
-user.place(x=10,y=10)
-pas = Label(frame,text="Enter User Password")
-pas.place(x=10,y=40)
-#user.pack()
-#pas.pack()
+Demonstrates: Frame and Label using the place geometry manager
+for absolute x/y positioning.
+"""
+from tkinter import Label, Frame
+from tkhelper import create_window, run
 
 
-#entry.pack()
-#entry1.pack()
-frame.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+def build_ui(root):
+    """Place two labels at fixed coordinates inside a frame."""
+    frame = Frame(root, width=400, height=400)
+
+    Label(frame, text="Enter User Name").place(x=10, y=10)
+    Label(frame, text="Enter User Password").place(x=10, y=40)
+
+    frame.pack()
+
+
+if __name__ == "__main__":
+    root = create_window("Place Layout")
+    build_ui(root)
+    run(root)

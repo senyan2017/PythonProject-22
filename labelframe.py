@@ -1,22 +1,28 @@
-from tkinter import *
+"""labelframe.py – Combobox (ttk) demo.
+
+Demonstrates: ttk.Combobox populated with a value list and
+reading the current selection on a button click.
+"""
+from tkinter import Button, END
+from tkinter.ttk import Combobox
+from tkhelper import create_window, run
 
 
-def Clickme():
-   print(spin1.get())
-   print(s.get())
+class ComboboxDemo:
+    def __init__(self, root):
+        cities = ["Gkp", "Ndls", "lko", "1", "4", "666"]
+
+        self.combo = Combobox(root, values=cities)
+        self.combo.set("select your city")
+        self.combo.pack()
+
+        Button(root, text="Display", command=self.show_value).pack()
+
+    def show_value(self):
+        print(self.combo.get())
 
 
-bob=Tk()
-frame= LabelFrame(bob,text="Label frame",padx=15,pady=15)
-
-spin1 = Spinbox(frame,from_=1, to=12)
-spin1.pack()
-
-s= Scale(frame,from_=0,to=100,orient=HORIZONTAL,length=200,width=10,sliderlength=50)
-s.set(10)
-s.pack()
-b=Button(frame,text="Get spin Box value",command=Clickme)
-b.pack()
-frame.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+if __name__ == "__main__":
+    root = create_window("Combobox Demo", "500x500+300+200")
+    ComboboxDemo(root)
+    run(root)

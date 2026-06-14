@@ -1,11 +1,19 @@
-from tkinter import *
+"""gui.py – Simple login form using pack() layout.
 
-test = Tk()
-test.geometry("300x200+200+300")
-UserName =Label(test,text="Enter User Name",bg="black",fg="white")
-UserName.pack(side=LEFT)
-entry=Entry(test,bg="black",fg="white")
-entry.pack(side=LEFT)
-btn=Button(test,text="Login")
-btn.pack(side=LEFT)
-test.mainloop()
+Demonstrates: Label, Entry, Button with pack geometry manager.
+"""
+from tkinter import Label, Entry, Button
+from tkhelper import create_window, run
+
+
+def build_ui(root):
+    """Build a minimal label + entry + button row."""
+    Label(root, text="Enter User Name", bg="black", fg="white").pack(side="left")
+    Entry(root, bg="black", fg="white").pack(side="left")
+    Button(root, text="Login").pack(side="left")
+
+
+if __name__ == "__main__":
+    root = create_window("Login Form")
+    build_ui(root)
+    run(root)

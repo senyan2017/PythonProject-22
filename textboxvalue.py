@@ -1,23 +1,27 @@
-from tkinter import *
-import pymysql
+"""textboxvalue.py – Entry with StringVar demo.
 
-bob=Tk()
-def Clickme():
-    con = pymysql.connect(host="localhost", user="root", db="pythongui")
-    mycursor = con.cursor()
-    a=5
-    s=en.get()
-    #mycursor.execute("INSERT INTO detail VALUES ( %s,%s)", (a,s))
-    mycursor.execute("INSERT INTO detail(name) VALUES ( %s)", (s))
-    print("data inserted successfully")
-    con.commit()
-    # to close the connection
-    con.close()
-    print(s)
+Demonstrates: StringVar bound to an Entry via textvariable,
+and presetting a default value with .set().
+"""
+from tkinter import StringVar, Entry, Button
+from tkhelper import create_window, run
 
-en=Entry(bob)
-en.pack()
-b=Button(bob,text="Message Box",command=Clickme)
-b.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+
+class EntryStringDemo:
+    def __init__(self, root):
+        self.text_var = StringVar()
+        self.text_var.set("Hello")
+
+        entry = Entry(root, textvariable=self.text_var, insertwidth=3)
+        entry.pack()
+
+        Button(root, text="Message Box", command=self.show_value).pack()
+
+    def show_value(self):
+        print(self.text_var.get())
+
+
+if __name__ == "__main__":
+    root = create_window("Entry StringVar Demo")
+    EntryStringDemo(root)
+    run(root)

@@ -1,17 +1,26 @@
-from tkinter import *
+"""oopgui.py – Object-oriented GUI example.
 
-class Myform:
-    def __init__(self,form):
-        self.printButton=Button(form,text="Message Box",command=self.msg)
-        self.printButton.pack(side=LEFT)
-        self.quitbutton=Button(form,text="Exit",command=quit)
-        self.quitbutton.pack(side=LEFT)
-    def msg(self):
-        print("Gui foorm Created")
+Demonstrates: wrapping widget creation inside a class with
+instance methods as callbacks.
+"""
+from tkinter import Button, LEFT
+from tkhelper import create_window, run
 
 
+class MyForm:
+    def __init__(self, root):
+        self.print_button = Button(root, text="Message Box",
+                                   command=self.on_print)
+        self.print_button.pack(side=LEFT)
 
-bob=Tk()
-test= Myform(bob)
-bob.geometry("300x200+300+200")
-bob.mainloop()
+        self.quit_button = Button(root, text="Exit", command=root.quit)
+        self.quit_button.pack(side=LEFT)
+
+    def on_print(self):
+        print("Gui form Created")
+
+
+if __name__ == "__main__":
+    root = create_window("OOP GUI Demo")
+    MyForm(root)
+    run(root)

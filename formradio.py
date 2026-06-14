@@ -1,16 +1,20 @@
 from tkinter import *
 
-def Clickme():
-    s1=s.get()
-    print(s1)
+from gui_helpers import run
 
-bob=Tk()
-s=IntVar()
-r1=Radiobutton(bob,text="Male",value=1,variable=s)
-r2=Radiobutton(bob,text="Female",value=2,variable=s)
-r1.pack()
-r2.pack()
-b=Button(bob,text="Message Box",command=Clickme)
-b.pack()
-bob.geometry("300x200+300+200")
-bob.mainloop()
+
+def build(root):
+    choice = IntVar()
+    r1 = Radiobutton(root, text="Male", value=1, variable=choice)
+    r2 = Radiobutton(root, text="Female", value=2, variable=choice)
+    r1.pack()
+    r2.pack()
+
+    def show():
+        print(choice.get())
+
+    Button(root, text="Message Box", command=show).pack()
+
+
+if __name__ == "__main__":
+    run(build, title="Radiobutton demo", geometry="300x200+300+200")

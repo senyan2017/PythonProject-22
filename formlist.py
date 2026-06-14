@@ -1,25 +1,29 @@
 from tkinter import *
 
-def Delete():
-    checked_item = l.curselection()
-    for item in checked_item:
-        print(l.delete(item))
-def Clickme():
-    checked_item=l.curselection()
-    print(checked_item)
-    for item in checked_item:
-        print(l.get(item))
+from gui_helpers import run
 
-bob = Tk()
-l = Listbox(bob,width=50,selectmode=EXTENDED)
-l.insert(1,"apple")
-l.insert(2,"orange")
-l.insert(3,"orange")
-l.insert(4,"orange")
-l.pack()
-b=Button(bob,text="Display",command=Clickme)
-b.pack()
-b1=Button(bob,text="Delete",command=Delete)
-b1.pack()
-bob.geometry("500x500+300+200")
-bob.mainloop()
+
+def build(root):
+    listbox = Listbox(root, width=50, selectmode=EXTENDED)
+    listbox.insert(1, "apple")
+    listbox.insert(2, "orange")
+    listbox.insert(3, "orange")
+    listbox.insert(4, "orange")
+    listbox.pack()
+
+    def display():
+        selected = listbox.curselection()
+        print(selected)
+        for item in selected:
+            print(listbox.get(item))
+
+    def delete():
+        for item in listbox.curselection():
+            print(listbox.delete(item))
+
+    Button(root, text="Display", command=display).pack()
+    Button(root, text="Delete", command=delete).pack()
+
+
+if __name__ == "__main__":
+    run(build, title="Listbox demo", geometry="500x500+300+200")
